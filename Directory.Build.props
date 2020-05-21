@@ -1,0 +1,14 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Authors>Łukasz Kurzyniec</Authors>
+    <Copyright>Copyright © happy+code 2019</Copyright>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)ShippingService.ruleset</CodeAnalysisRuleSet>
+ </PropertyGroup>
+</Project>
