@@ -1,7 +1,5 @@
-using System;
 using ShippingService.Core.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ShippingService.Core
 {

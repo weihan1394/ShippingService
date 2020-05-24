@@ -1,12 +1,8 @@
-# docker-compose up -d
-# docker-compose up --build
-# docker-compose down
-
-version: "3.6"
+version: "3.7"
 
 services:
   mysql:
-    image: mysql:8
+    image: mysql:5.6
     container_name: markono-mysql
     ports:
       - 3306:3306
@@ -14,10 +10,12 @@ services:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: employees
       MYSQL_USER: user
-      MYSQL_PASSWORD: simplepwd
+      MYSQL_PASSWORD: Markono1!
     volumes:
       - dbdata:/var/lib/mysql
       - ./db/mysql/mysql-employees.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - markono-network
 
   mssql:
     image: mcr.microsoft.com/mssql/server:2017-latest
@@ -28,12 +26,31 @@ services:
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_PID=Express
-      - SA_PASSWORD=SomeStrongPwd123
+      - SA_PASSWORD=Markono1!
     # volumes:
     #   - dbdata:/var/opt/mssql/data
     #   - ./db/mssql/docker-entrypoint.sh:/entrypoint.sh
     #   - ./db/mssql/docker-db-init.sh:/db-init.sh
     #   - ./db/mssql/mssql-cars.sql:/db-init.sql
+    networks:
+      - markono-network
+  
+  postgres:
+    image: postgres:12.2
+    container_name: markono-postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: Markono1!
+    ports:
+      - 5432:5432
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    networks:
+      - markono-network
 
 volumes:
   dbdata:
+  
+networks:
+  markono-network:
+    name: markono-network

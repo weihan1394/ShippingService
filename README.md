@@ -1,4 +1,4 @@
-# Shipping Servi
+# Shipping Service
 
 Boilerplate of API in `.NET Core 3.1`
 
