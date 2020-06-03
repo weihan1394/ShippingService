@@ -10,33 +10,16 @@ namespace ShippingService.Core
         {
         }
 
-        public virtual DbSet<Car> Cars { get; set; }
-        public virtual DbSet<Owner> Owners { get; set; }
+        public virtual DbSet<car> cars { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
-            modelBuilder.Entity<Car>(entity =>
+            modelBuilder.Entity<car>(entity =>
             {
-                entity.Property(e => e.Model).IsUnicode(false);
-
-                entity.Property(e => e.Plate).IsUnicode(false);
-
-                entity.HasOne(d => d.Owner)
-                    .WithMany(p => p.Cars)
-                    .HasForeignKey(d => d.OwnerId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Cars_Owners");
-            });
-
-            modelBuilder.Entity<Owner>(entity =>
-            {
-                entity.Property(e => e.FirstName).IsUnicode(false);
-
-                entity.Property(e => e.FullName).IsUnicode(false);
-
-                entity.Property(e => e.LastName).IsUnicode(false);
+                entity.Property(e => e.model).IsUnicode(false);
+                entity.Property(e => e.plate).IsUnicode(false);
             });
         }
     }

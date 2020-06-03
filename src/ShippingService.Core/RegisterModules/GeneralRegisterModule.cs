@@ -8,7 +8,6 @@ namespace ShippingService.Core.RegisterModules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<EmployeeRepository>().As<IEmployeeRepository>();
             builder.RegisterType<CarService>().As<ICarService>();
         }
     }
