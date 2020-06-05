@@ -16,13 +16,13 @@ namespace ShippingService.Api.Infrastructure.Registrations
             {
                 swaggerOptions.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Simple Api",
+                    Title = "Markono ShippingService Api",
                     Version = "v1",
                     Description = $"ApiKey {secretKey}",
                     Contact = new OpenApiContact
                     {
-                        Name = "Łukasz Kurzyniec",
-                        Url = new Uri("https://kurzyniec.pl/"),
+                        Name = "Markono",
+                        Url = new Uri("https://markono.com/"),
                     }
                 });
 

@@ -2,21 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ShippingService.Core.Services
 {
     public interface IShippingRateService
     {
-        void SaveFile(List<IFormFile> files, string subDirectory);
+        void SaveFile(List<IFormFile> files, string directory, string subDirectory);
         string SizeConverter(long bytes);
     }
 
     public class ShippingRateService : IShippingRateService
     {
-        public void SaveFile([FromForm(Name = ""] List<IFormFile> files, string subDirectory)
+        public void SaveFile([FromForm] List<IFormFile> files, string directory, string subDirectory)
         {
             subDirectory = subDirectory ?? string.Empty;
-            var target = Path.Combine("D:\\webroot\\", subDirectory);
+            var target = Path.Combine(directory, subDirectory);
 
             Directory.CreateDirectory(target);
 
