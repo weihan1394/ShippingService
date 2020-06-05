@@ -19,7 +19,7 @@ namespace ShippingService.Db
             SetRunPattern(upgradeOptions.RunPattern);
 
             var upgrader = DeployChanges.To
-                .SqlDatabase(configuration.GetConnectionString("MsSqlDb"))
+                .PostgresqlDatabase(configuration.GetConnectionString("PostgresSqlDb"))
                 .WithScriptsAndCodeEmbeddedInAssembly(Assembly.GetExecutingAssembly(), (fileName) => _runPattern.IsMatch(fileName))
                 .WithExecutionTimeout(TimeSpan.FromSeconds(upgradeOptions.CommandExecutionTimeoutSeconds))
                 .WithTransaction()

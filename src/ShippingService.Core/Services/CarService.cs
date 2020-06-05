@@ -23,16 +23,16 @@ namespace ShippingService.Core.Services
 
         public async Task<IEnumerable<CarDto>> GetAllSortedByPlateAsync(CancellationToken cancellationToken)
         {
-            var cars = await _dbContext.Cars
+            var cars = await _dbContext.cars
                 .AsNoTracking()
-                .OrderBy(x => x.Plate)
+                .OrderBy(x => x.plate)
                 .ToListAsync(cancellationToken);
 
             return cars.Select(x => new CarDto
             {
-                Id = x.Id,
-                Plate = x.Plate,
-                Model = x.Model,
+                Id = x.id,
+                Plate = x.plate,
+                Model = x.model,
             });
         }
     }

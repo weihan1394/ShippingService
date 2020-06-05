@@ -8,20 +8,12 @@ namespace ShippingService.Api.IntegrationTests.Infrastructure
     {
         public static void Feed(CarsContext dbContext)
         {
-            var owner1 = new Owner
+            var car1 = new car
             {
-                FirstName = "Dom",
-                LastName = "Cobb",
+                plate = "DW 12345",
+                model = "Toyota Avensis",
             };
-            dbContext.Owners.Add(owner1);
-
-            var car1 = new Car
-            {
-                Plate = "DW 12345",
-                Model = "Toyota Avensis",
-                Owner = owner1,
-            };
-            dbContext.Cars.Add(car1);
+            dbContext.cars.Add(car1);
 
             dbContext.SaveChanges();
         }

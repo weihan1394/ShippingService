@@ -3,16 +3,21 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Scripts\Code\**" />
+    <EmbeddedResource Remove="Scripts\Code\**" />
+    <None Remove="Scripts\Code\**" />
+  </ItemGroup>
   
   <ItemGroup>
     <Content Include="appsettings.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\Sql\S001_AddCarTypesTable.sql" />
+    <EmbeddedResource Include="Scripts\Sql\S001_AddCarTable.sql" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="dbup-sqlserver" Version="4.3.1" />
+    <PackageReference Include="dbup-postgresql" Version="4.3.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.4" />
   </ItemGroup>

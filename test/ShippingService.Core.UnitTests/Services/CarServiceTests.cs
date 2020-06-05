@@ -31,14 +31,12 @@ namespace ShippingService.Core.UnitTests.Services
         public async Task GetAllSortedByPlateAsync_should_return_expected_result(int rand1, int rand2, int expectedId)
         {
             //given
-            _fixture.Customize<Car>(c => c.Without(x => x.Owner));
-
-            var cars = new List<Car>();
+            var cars = new List<car>();
             _fixture.AddManyTo(cars, rand1);
-            cars.Add(new Car { Id = expectedId, Plate = "0" });
+            cars.Add(new car { id = expectedId, plate = "0" });
             _fixture.AddManyTo(cars, rand2);
 
-            _dbContextMock.Setup(x => x.Cars).Returns(cars.GetMockDbSetObject());
+            _dbContextMock.Setup(x => x.cars).Returns(cars.GetMockDbSetObject());
 
             //when
             var result = await _service.GetAllSortedByPlateAsync(default);

@@ -23,10 +23,6 @@ namespace ShippingService.Api.IntegrationTests.Infrastructure
                 .AddDataAnnotations()
                 .SetCompatibilityVersion(CompatibilityVersion.Latest);
 
-            services.AddDbContext<EmployeesContext>(options =>
-            {
-                options.UseInMemoryDatabase("employees");
-            });
             services.AddDbContext<CarsContext>(options =>
             {
                 options.UseInMemoryDatabase("cars");
@@ -42,9 +38,6 @@ namespace ShippingService.Api.IntegrationTests.Infrastructure
 
         public override void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            var employeesContext = app.ApplicationServices.GetService<EmployeesContext>();
-            EmployeesContextDataFeeder.Feed(employeesContext);
-
             var carsContext = app.ApplicationServices.GetService<CarsContext>();
             CarsContextDataFeeder.Feed(carsContext);
 

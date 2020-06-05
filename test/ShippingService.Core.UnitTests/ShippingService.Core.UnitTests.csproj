@@ -15,4 +15,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\ShippingService.Core\ShippingService.Core.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+  </ItemGroup>
 </Project>
