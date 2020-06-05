@@ -45,8 +45,6 @@ Markono Shipping Service Rate
 * Console application as a simple db migration tool - [Program.cs](src/ShippingService.Db/Program.cs)
 * Sample migration scripts, both `.sql` and `.cs` - [S001_AddCarTable.sql](src/ShippingService.Db/Scripts/Sql/S001_AddCarTable.sql)
 
-![ShippingService.Db](https://kurzyniec.pl/wp-content/uploads/2019/12/netcore-boilerplate-db.png "ShippingService.Db")
-
 ## Build the solution
 
 Just execute `dotnet build` in the root directory, it takes `ShippingService.sln` and build everything.
