@@ -8,7 +8,7 @@ namespace ShippingService.Api.IntegrationTests.Infrastructure
     {
         public static void Feed(CarsContext dbContext)
         {
-            var car1 = new car
+            var car1 = new Car
             {
                 plate = "DW 12345",
                 model = "Toyota Avensis",

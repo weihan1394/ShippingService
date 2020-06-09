@@ -8,11 +8,15 @@
     <EmbeddedResource Remove="Scripts\Code\**" />
     <None Remove="Scripts\Code\**" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Scripts\Sql\S002_CreateShippingExpresTable.sql" />
+  </ItemGroup>
   
   <ItemGroup>
     <Content Include="appsettings.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\Sql\S002_CreateShippingExpresTable.sql" />
     <EmbeddedResource Include="Scripts\Sql\S001_AddCarTable.sql" />
   </ItemGroup>
 

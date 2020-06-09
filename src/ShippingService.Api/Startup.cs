@@ -41,6 +41,7 @@ namespace ShippingService.Api
 
             //there is a difference between AddDbContext() and AddDbContextPool(), more info https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-2.0#dbcontext-pooling and https://stackoverflow.com/questions/48443567/adddbcontext-or-adddbcontextpool
             services.AddDbContextPool<CarsContext>(options => options.UseNpgsql(_configuration.GetConnectionString("PostgresSqlDb")));
+            services.AddDbContextPool<ShippingExpressContext>(options => options.UseNpgsql(_configuration.GetConnectionString("PostgresSqlDb")));
 
             services.Configure<ApiKeySettings>(_configuration.GetSection("ApiKey"));
             services.AddSwagger(_configuration);

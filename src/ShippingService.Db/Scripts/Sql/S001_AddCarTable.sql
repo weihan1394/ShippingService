@@ -1,13 +1,13 @@
 -- Create tables
-CREATE TABLE IF NOT EXISTS Cars
+CREATE TABLE IF NOT EXISTS cars
 (
-    Id SERIAL PRIMARY KEY,
-	  Plate VARCHAR(50) NOT NULL,
-	  Model VARCHAR (50) NULL
+    id    SERIAL PRIMARY KEY,
+	  plate VARCHAR(50) NOT NULL,
+	  model VARCHAR (50) NULL
 );
 
 -- Insert data
-INSERT INTO Cars (Id, Plate, Model)
+INSERT INTO cars (id, plate, model)
 VALUES
 		(1, 'JHV 770', 'Mercedes-Benz GLE Coupe'),
 		(2, 'TAD-3173', 'Datsun GO+'),

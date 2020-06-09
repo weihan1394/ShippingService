@@ -31,9 +31,9 @@ namespace ShippingService.Core.UnitTests.Services
         public async Task GetAllSortedByPlateAsync_should_return_expected_result(int rand1, int rand2, int expectedId)
         {
             //given
-            var cars = new List<car>();
+            var cars = new List<Car>();
             _fixture.AddManyTo(cars, rand1);
-            cars.Add(new car { id = expectedId, plate = "0" });
+            cars.Add(new Car { id = expectedId, plate = "0" });
             _fixture.AddManyTo(cars, rand2);
 
             _dbContextMock.Setup(x => x.cars).Returns(cars.GetMockDbSetObject());

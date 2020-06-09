@@ -10,6 +10,7 @@ namespace ShippingService.Core.RegisterModules
         // link interface to service
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<ShippingExpressRepository>().As<IShippingExpressRepository>();
             builder.RegisterType<CarService>().As<ICarService>();
             builder.RegisterType<ShippingRateService>().As<IShippingRateService>();
         }
