@@ -33,34 +33,34 @@ namespace ShippingService.Core.Util
                             switch (col)
                             {
                                 case 1:
-                                    expressDto.Type = currValue;
+                                    expressDto.type = currValue;
                                     break;
                                 case 2:
-                                    expressDto.Trackable = currValue;
+                                    expressDto.trackable = currValue;
                                     break;
                                 case 3:
-                                    expressDto.ServiceLevel = currValue;
+                                    expressDto.service_level = currValue;
                                     break;
                                 case 4:
-                                    expressDto.Country = currValue;
+                                    expressDto.country = currValue;
                                     break;
                                 case 5:
-                                    expressDto.Country = currValue;
+                                    expressDto.country_code = currValue;
                                     break;
                                 case 6:
-                                    expressDto.RateFlag = NumberUtil.convertStringToInt(currValue);
+                                    expressDto.rate_flag = NumberUtil.convertStringToInt(currValue);
                                     break;
                                 case 7:
-                                    expressDto.Weight = NumberUtil.convertStringToDouble(currValue);
+                                    expressDto.weight = NumberUtil.convertStringToDouble(currValue);
                                     break;
                                 case 8:
-                                    expressDto.DHLExpress = NumberUtil.convertStringToDouble(currValue);
+                                    expressDto.dhl_express = NumberUtil.convertStringToDouble(currValue);
                                     break;
                                 case 9:
-                                    expressDto.SFEconomy = NumberUtil.convertStringToDouble(currValue);
+                                    expressDto.sf_economy = NumberUtil.convertStringToDouble(currValue);
                                     break;
                                 case 10:
-                                    expressDto.Zone = NumberUtil.convertStringToInt(currValue);
+                                    expressDto.zone = NumberUtil.convertStringToInt(currValue);
                                     break;
                             }       
                         }

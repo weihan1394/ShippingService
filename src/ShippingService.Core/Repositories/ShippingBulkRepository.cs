@@ -7,15 +7,13 @@ using ShippingService.Core.Models;
 
 namespace ShippingService.Core.Repositories
 {
-    public interface IShippingExpressRepository
+    public interface IShippingBulkRepository
     {
-        Task<bool> insertRecords(List<express> lsShippingExpress, CancellationToken cancellationToken);
-        Task deleteAllRecords(CancellationToken cancellationToken);
     }
 
-    public class ShippingExpressRepository : RepositoryBase<express>, IShippingExpressRepository
+    public class ShippingBulkRepository : RepositoryBase<bulk>, IShippingBulkRepository
     {
-        public ShippingExpressRepository(DBContext dbContext) : base(dbContext)
+        public ShippingBulkRepository(DBContext dbContext) : base(dbContext)
         {
 
         }

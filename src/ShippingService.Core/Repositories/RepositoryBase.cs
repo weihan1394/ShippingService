@@ -3,11 +3,11 @@ namespace ShippingService.Core.Repositories
     public abstract class RepositoryBase<TEntity>
         where TEntity : class
     {
-        protected ShippingExpressContext DbContext { get; }
+        protected DBContext dBContext { get; }
 
-        public RepositoryBase(ShippingExpressContext dbContext)
+        public RepositoryBase(DBContext dbContext)
         {
-            DbContext = dbContext;
+            dBContext = dbContext;
         }
     }
 }

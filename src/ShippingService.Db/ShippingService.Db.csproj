@@ -10,12 +10,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Scripts\Sql\S002_CreateShippingExpresTable.sql" />
+    <None Remove="Scripts\Sql\S003_CreateShippingBulkMailTable.sql" />
   </ItemGroup>
   
   <ItemGroup>
     <Content Include="appsettings.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\Sql\S003_CreateShippingBulkMailTable.sql" />
     <EmbeddedResource Include="Scripts\Sql\S002_CreateShippingExpresTable.sql" />
     <EmbeddedResource Include="Scripts\Sql\S001_AddCarTable.sql" />
   </ItemGroup>

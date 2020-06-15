@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
@@ -14,7 +15,7 @@ namespace ShippingService.Core.Services
 {
     public interface IShippingRateService
     {
-        void SaveFile(List<IFormFile> files, string directory, string subDirectory, CancellationToken cancellationToken);
+        Task SaveFile(List<IFormFile> files, string directory, string subDirectory, CancellationToken cancellationToken);
         string SizeConverter(long bytes);
     }
 
@@ -29,14 +30,14 @@ namespace ShippingService.Core.Services
 
         CultureInfo cultures = new CultureInfo("en-US");
 
-        public void SaveFile([FromForm] List<IFormFile> files, string directory, string subDirectory, CancellationToken cancellationToken)
+        public async Task SaveFile([FromForm] List<IFormFile> files, string directory, string subDirectory, CancellationToken cancellationToken)
         {
             subDirectory = subDirectory ?? string.Empty;
             var target = Path.Combine(directory, subDirectory);
 
             Directory.CreateDirectory(target);
 
-            files.ForEach(async file =>
+            foreach(IFormFile file in files)
             {
                 if (file.Length <= 0) return;
                 var filePath = Path.Combine(target, file.FileName);
@@ -58,6 +59,7 @@ namespace ShippingService.Core.Services
                             for (int row = 2; row < rowCount; row++)
                             {
                                 express shippingExpress = new express();
+                                shippingExpress.id = row - 1;
                                 for (int col = 1; col < colCount; col++)
                                 {
                                     string currValue = worksheet.Cells[row, col].Value == null ? string.Empty : worksheet.Cells[row, col].Value.ToString();
@@ -69,43 +71,49 @@ namespace ShippingService.Core.Services
                                             {
                                                 goto End;
                                             }
-                                            shippingExpress.Type = currValue;
+                                            shippingExpress.type = currValue;
                                             break;
                                         case 2:
-                                            shippingExpress.Trackable = currValue;
+                                            shippingExpress.trackable = currValue;
                                             break;
                                         case 3:
-                                            shippingExpress.ServiceLevel = currValue;
+                                            shippingExpress.service_level = currValue;
                                             break;
                                         case 4:
-                                            shippingExpress.Country = currValue;
+                                            shippingExpress.country = currValue;
                                             break;
                                         case 5:
-                                            shippingExpress.Country = currValue;
+                                            shippingExpress.country_code = currValue;
                                             break;
                                         case 6:
-                                            shippingExpress.RateFlag = NumberUtil.convertStringToInt(currValue);
+                                            shippingExpress.rate_flag = NumberUtil.convertStringToInt(currValue);
                                             break;
                                         case 7:
-                                            shippingExpress.Weight = NumberUtil.convertStringToDouble(currValue);
+                                            shippingExpress.weight = NumberUtil.convertStringToDouble(currValue);
                                             break;
                                         case 8:
-                                            shippingExpress.DHLExpress = NumberUtil.convertStringToDouble(currValue);
+                                            shippingExpress.dhl_express = NumberUtil.convertStringToDouble(currValue);
                                             break;
                                         case 9:
-                                            shippingExpress.SFEconomy = NumberUtil.convertStringToDouble(currValue);
+                                            shippingExpress.sf_economy = NumberUtil.convertStringToDouble(currValue);
                                             break;
                                         case 10:
-                                            shippingExpress.Zone = NumberUtil.convertStringToInt(currValue);
+                                            shippingExpress.ninja_van = NumberUtil.convertStringToDouble(currValue);
+                                            break;
+                                        case 11:
+                                            shippingExpress.zone = NumberUtil.convertStringToInt(currValue);
                                             break;
                                     }
-                                }
+                                 }
                                 lsShippingExpress.Add(shippingExpress);
                             }
 
                         End:
                             Console.WriteLine(lsShippingExpress.Count);
-                            var result = await _shippingExpressRepository.InsertAllAsync(lsShippingExpress, cancellationToken);
+
+                            // delete everything in the database
+                            await _shippingExpressRepository.deleteAllRecords(cancellationToken);
+                            var result = await _shippingExpressRepository.insertRecords(lsShippingExpress, cancellationToken);
                         }
                     }
                     catch (Exception ex)
@@ -113,7 +121,7 @@ namespace ShippingService.Core.Services
                         Console.WriteLine(ex);
                     }
                 }
-            });
+            }
         }
 
         public string SizeConverter(long bytes)

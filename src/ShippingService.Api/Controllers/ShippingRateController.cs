@@ -45,14 +45,14 @@ namespace ShippingService.Api.Controllers
 
         // upload file(s) to server that palce under path: rootDirectory/subDirectory
         [HttpPost("upload")]
-        public IActionResult UploadShippingRate([FromForm(Name = "files")] List<IFormFile> files, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> UploadShippingRate([FromForm(Name = "files")] List<IFormFile> files, CancellationToken cancellationToken = default)
         {
             try
             {
                 string directory = _configuration.GetValue<string>("ShippingService:ServerDirectory");
                 string subDirectory = _configuration.GetValue<string>("ShippingService:UploadRateSubDirectory");
                 // save the file
-                _shippingRateService.SaveFile(files, directory , subDirectory, cancellationToken);
+                await _shippingRateService.SaveFile(files, directory , subDirectory, cancellationToken);
 
                 return Ok(new { files.Count, Size = _shippingRateService.SizeConverter(files.Sum(f => f.Length)) });
             }

@@ -1,29 +1,35 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace ShippingService.Core.Models
 {
     public class express
     {
-        public string Type { get; set; }
+        [Key]
+        public int id { get; set; }
 
-        public string Trackable { get; set; }
+        public string type { get; set; }
 
-        public string ServiceLevel { get; set; }
+        public string trackable { get; set; }
 
-        public string Country { get; set; }
+        public string service_level { get; set; }
 
-        public string CountryCode { get; set; }
+        public string country { get; set; }
 
-        public int RateFlag { get; set; }
+        public string country_code { get; set; }
 
-        public double Weight { get; set; }
+        public int rate_flag { get; set; }
 
-        public double DHLExpress { get; set; }
+        public double weight { get; set; }
 
-        public double SFEconomy { get; set; }
+        public double dhl_express { get; set; }
 
-        public int Zone { get; set; }
+        public double sf_economy { get; set; }
+
+        public double ninja_van { get; set; }
+
+        public int zone { get; set; }
     }
 }
