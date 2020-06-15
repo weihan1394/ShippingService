@@ -8,7 +8,7 @@ namespace ShippingService.Core.Repositories
 {
     public interface IShippingExpressRepository
     {
-        Task<bool> InsertAllAsync(List<express> lsShippingExpress, CancellationToken cancellationToken);
+        bool InsertAllAsync(List<express> lsShippingExpress);
     }
 
     public class ShippingExpressRepository : RepositoryBase<express>, IShippingExpressRepository
@@ -18,18 +18,19 @@ namespace ShippingService.Core.Repositories
 
         }
 
-        public async Task<bool> InsertAllAsync(List<express> lsShippingExpress, CancellationToken cancellationToken)
+        public bool InsertAllAsync(List<express> lsShippingExpress)
         {
             try { 
                 foreach (express e in lsShippingExpress)
                 {
-                    await DbContext.AddAsync(e, cancellationToken);
+                    DbContext.Add(e);
                 }
-                await DbContext.SaveChangesAsync(cancellationToken);
+                DbContext.SaveChanges();
 
                 return true;
             } catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return false;
             }
         }

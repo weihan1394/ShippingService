@@ -22,7 +22,7 @@ namespace ShippingService.Core.Services
     {
         private readonly IShippingExpressRepository _shippingExpressRepository;
 
-        public ShippingRateService(ShippingExpressRepository shippingExpressRepository)
+        public ShippingRateService(IShippingExpressRepository shippingExpressRepository)
         {
             _shippingExpressRepository = shippingExpressRepository;
         }
@@ -105,7 +105,7 @@ namespace ShippingService.Core.Services
 
                         End:
                             Console.WriteLine(lsShippingExpress.Count);
-                            var result = await _shippingExpressRepository.InsertAllAsync(lsShippingExpress, cancellationToken);
+                            var result = _shippingExpressRepository.InsertAllAsync(lsShippingExpress);
                         }
                     }
                     catch (Exception ex)
