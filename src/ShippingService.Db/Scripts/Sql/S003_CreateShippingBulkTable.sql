@@ -1,5 +1,5 @@
 -- Create tables
-CREATE TABLE IF NOT EXISTS bulk_mail
+CREATE TABLE IF NOT EXISTS bulk
 (
     id                    SERIAL        PRIMARY KEY,
     type                  TEXT          NOT NULL,
@@ -7,8 +7,8 @@ CREATE TABLE IF NOT EXISTS bulk_mail
     service_level         TEXT          NOT NULL,
     country               TEXT          NOT NULL,
     country_code          TEXT          NOT NULL,
-    item_weight           INTEGER       NOT NULL,
-    total_weight          NUMERIC       NOT NULL,
+    item_weight_kg        INTEGER       NOT NULL,
+    total_weight_kg       NUMERIC       NOT NULL,
     ascendia_item_rate    NUMERIC       NOT NULL,
     ascendia_rate_per_kg  NUMERIC       NOT NULL,
     singpost_item_rate    NUMERIC       NOT NULL,

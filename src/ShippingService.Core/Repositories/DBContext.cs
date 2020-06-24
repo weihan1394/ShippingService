@@ -12,6 +12,7 @@ namespace ShippingService.Core
 
         public virtual DbSet<express> express { get; set; }
         public virtual DbSet<bulk> bulk { get; set; }
+        public virtual DbSet<postal> postal { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,13 +41,27 @@ namespace ShippingService.Core
                 entity.Property(e => e.service_level).IsUnicode(false);
                 entity.Property(e => e.country).IsUnicode(false);
                 entity.Property(e => e.country_code).IsUnicode(false);
-                entity.Property(e => e.item_weight).IsUnicode(false);
+                entity.Property(e => e.item_weight_kg).IsUnicode(false);
+                entity.Property(e => e.total_weight_kg).IsUnicode(false);
                 entity.Property(e => e.ascendia_item_rate).IsUnicode(false);
                 entity.Property(e => e.ascendia_rate_per_kg).IsUnicode(false);
                 entity.Property(e => e.singpost_item_rate).IsUnicode(false);
                 entity.Property(e => e.singpost_rate_per_kg).IsUnicode(false);
                 entity.Property(e => e.dai_item_rate).IsUnicode(false);
                 entity.Property(e => e.dai_rate_per_kg).IsUnicode(false);
+            });
+
+            modelBuilder.Entity<postal>(entity =>
+            {
+                entity.Property(e => e.id).IsUnicode(false);
+                entity.Property(e => e.type).IsUnicode(false);
+                entity.Property(e => e.trackable).IsUnicode(false);
+                entity.Property(e => e.service_level_days).IsUnicode(false);
+                entity.Property(e => e.country).IsUnicode(false);
+                entity.Property(e => e.country_code).IsUnicode(false);
+                entity.Property(e => e.item_weight_kg).IsUnicode(false);
+                entity.Property(e => e.singpost_item_rate).IsUnicode(false);
+                entity.Property(e => e.singpost_rate_per_kg).IsUnicode(false);
             });
         }
     }

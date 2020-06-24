@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,8 @@ namespace ShippingService.Core.Repositories
     {
         Task<bool> insertRecords(List<express> lsShippingExpress, CancellationToken cancellationToken);
         Task deleteAllRecords(CancellationToken cancellationToken);
+
+        List<express> retrieveAll(CancellationToken cancellationToken);
     }
 
     public class ShippingExpressRepository : RepositoryBase<express>, IShippingExpressRepository
@@ -47,6 +50,12 @@ namespace ShippingService.Core.Repositories
                 Console.WriteLine(ex);
                 return false;
             }
+        }
+
+        public List<express> retrieveAll(CancellationToken cancellationToken)
+        {
+            List<express> lsExpress = dBContext.express.ToList();
+            return lsExpress;
         }
     }
 }

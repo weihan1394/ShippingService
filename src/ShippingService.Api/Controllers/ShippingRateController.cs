@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,13 +53,31 @@ namespace ShippingService.Api.Controllers
                 string directory = _configuration.GetValue<string>("ShippingService:ServerDirectory");
                 string subDirectory = _configuration.GetValue<string>("ShippingService:UploadRateSubDirectory");
                 // save the file
-                await _shippingRateService.SaveFile(files, directory , subDirectory, cancellationToken);
+                await _shippingRateService.saveFile(files, directory , subDirectory, cancellationToken);
 
                 return Ok(new { files.Count, Size = _shippingRateService.SizeConverter(files.Sum(f => f.Length)) });
             }
             catch (Exception exception)
             {
                 return BadRequest($"Error: {exception.Message}");
+            }
+        }
+
+        [HttpGet("express")]
+        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult getExpressRate(CancellationToken cancellationToken)
+        {
+            HttpClient client = new HttpClient();
+            var result = _shippingRateService.retrieveExpress(cancellationToken);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(result);
             }
         }
     }

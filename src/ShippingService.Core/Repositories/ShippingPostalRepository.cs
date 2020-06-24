@@ -7,23 +7,24 @@ using ShippingService.Core.Models;
 
 namespace ShippingService.Core.Repositories
 {
-    public interface IShippingBulkRepository
+    public interface IShippingPostalRepository
     {
-        Task<bool> insertRecords(List<bulk> lsShippingExpress, CancellationToken cancellationToken);
+        Task<bool> insertRecords(List<postal> lsShippingExpress, CancellationToken cancellationToken);
         Task deleteAllRecords(CancellationToken cancellationToken);
     }
 
-    public class ShippingBulkRepository : RepositoryBase<bulk>, IShippingBulkRepository
+    public class ShippingPostalRepository : RepositoryBase<postal>, IShippingPostalRepository
     {
-        public ShippingBulkRepository(DBContext dbContext) : base(dbContext)
+        public ShippingPostalRepository(DBContext dbContext) : base(dbContext)
         {
+
         }
 
         public async Task deleteAllRecords(CancellationToken cancellationToken)
         {
             try
             {
-                dBContext.Database.ExecuteSqlCommand("DELETE FROM bulk");
+                int row = dBContext.Database.ExecuteSqlCommand("DELETE FROM postal");
                 dBContext.SaveChanges();
             } catch (Exception ex)
             {
@@ -31,10 +32,10 @@ namespace ShippingService.Core.Repositories
             }
         } 
 
-        public async Task<bool> insertRecords(List<bulk> lsShippingBulks, CancellationToken cancellationToken)
+        public async Task<bool> insertRecords(List<postal> lsShippingPostal, CancellationToken cancellationToken)
         {
             try { 
-                foreach (bulk e in lsShippingBulks)
+                foreach (postal e in lsShippingPostal)
                 {
                     await dBContext.AddAsync(e, cancellationToken);
                 }
