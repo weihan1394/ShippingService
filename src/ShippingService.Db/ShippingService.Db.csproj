@@ -21,7 +21,6 @@
     <EmbeddedResource Include="Scripts\Sql\S003_CreateShippingBulkTable.sql" />
     <EmbeddedResource Include="Scripts\Sql\S004_CreateShippingPostalTable.sql" />
     <EmbeddedResource Include="Scripts\Sql\S002_CreateShippingExpresTable.sql" />
-    <EmbeddedResource Include="Scripts\Sql\S001_AddCarTable.sql" />
   </ItemGroup>
 
   <ItemGroup>

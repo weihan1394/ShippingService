@@ -14,7 +14,6 @@ namespace ShippingService.Core.RegisterModules
             builder.RegisterType<ShippingExpressRepository>().As<IShippingExpressRepository>();
             builder.RegisterType<ShippingBulkRepository>().As<IShippingBulkRepository>();
             builder.RegisterType<ShippingPostalRepository>().As<IShippingPostalRepository>();
-            builder.RegisterType<CarService>().As<ICarService>();
 
             builder.Register(ctx => new ShippingRateService(ctx.Resolve<IShippingExpressRepository>(), ctx.Resolve<IShippingBulkRepository>(), ctx.Resolve<IShippingPostalRepository>())).As<IShippingRateService>();
         }
