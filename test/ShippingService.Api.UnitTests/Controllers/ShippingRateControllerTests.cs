@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.Xunit2;
@@ -26,34 +25,34 @@ namespace ShippingService.Api.UnitTests.Controllers
         }
 
         [Fact]
-        public async Task GetAll_should_call_GetAllSortedByPlateAsync_onto_service()
+        public async Task uploadShippingRate_should_call_saveFile()
         {
             IFormFile file = new FormFile(new MemoryStream(Encoding.UTF8.GetBytes("This is a dummy file")), 0, 0, "Data", "dummy.txt");
             List<IFormFile> formFiles = new List<IFormFile>();
             formFiles.Add(file);
             //when
-            await Controller.UploadShippingRate(formFiles, default);
+            await Controller.uploadShippingRate(formFiles, default);
 
             //then
-            _shippingRateServiceMock.Verify(x => x.saveFile(It.IsAny<List<IFormFile>(), It.IsAny<CancellationToken>()), Times.Once);
+            _shippingRateServiceMock.Verify(x => x.saveFile(It.IsAny<List<IFormFile>>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
-        //[Theory, AutoData]
-        //public async Task GetAll_should_return_Ok_with_expected_result(IEnumerable<CarDto> cars)
-        //{
-        //    //given
-        //    _carServiceMock.Setup(x => x.GetAllSortedByPlateAsync(It.IsAny<CancellationToken>()))
-        //        .ReturnsAsync(cars);
+        [Theory, AutoData]
+        public async Task uploadShippingRate_should_return_Ok_with_expected_result(IEnumerable<CarDto> cars)
+        {
+            //given
+            _shippingRateServiceMock.Setup(x => x.saveFile(It.IsAny<List<IFormFile>>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>()));
 
-        //    //when
-        //    var result = await Controller.GetAll(default) as OkObjectResult;
+            //when
+            IFormFile file = new FormFile(new MemoryStream(Encoding.UTF8.GetBytes("This is a dummy file")), 0, 0, "Data", "dummy.txt");
+            List<IFormFile> formFiles = new List<IFormFile>();
+            formFiles.Add(file);
+            //when
+            var result = await Controller.uploadShippingRate(formFiles, default) as OkObjectResult;
 
-        //    //then
-        //    result.Should().NotBeNull();
-        //    result.StatusCode.Should().Be(StatusCodes.Status200OK);
-        //    result.Value.Should().BeAssignableTo<IEnumerable<CarDto>>();
-        //    var value = result.Value as IEnumerable<CarDto>;
-        //    value.Should().HaveCount(cars.Count());
-        //}
+            //then
+            result.Should().NotBeNull();
+            result.StatusCode.Should().Be(StatusCodes.Status200OK);
+        }
     }
 }

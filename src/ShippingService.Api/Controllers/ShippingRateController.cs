@@ -46,7 +46,7 @@ namespace ShippingService.Api.Controllers
 
         // upload file(s) to server that palce under path: rootDirectory/subDirectory
         [HttpPost("upload")]
-        public async Task<IActionResult> UploadShippingRate([FromForm(Name = "files")] List<IFormFile> files, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> uploadShippingRate([FromForm(Name = "files")] List<IFormFile> files, CancellationToken cancellationToken = default)
         {
             try
             {
