@@ -8,12 +8,19 @@
     <EmbeddedResource Remove="Scripts\Code\**" />
     <None Remove="Scripts\Code\**" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Scripts\Sql\S001_CreateShippingExpresTable.sql" />
+    <None Remove="Scripts\Sql\S002_CreateShippingBulkTable.sql" />
+    <None Remove="Scripts\Sql\S003_CreateShippingPostalTable.sql" />
+  </ItemGroup>
   
   <ItemGroup>
     <Content Include="appsettings.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\Sql\S001_AddCarTable.sql" />
+    <EmbeddedResource Include="Scripts\Sql\S002_CreateShippingBulkTable.sql" />
+    <EmbeddedResource Include="Scripts\Sql\S003_CreateShippingPostalTable.sql" />
+    <EmbeddedResource Include="Scripts\Sql\S001_CreateShippingExpresTable.sql" />
   </ItemGroup>
 
   <ItemGroup>

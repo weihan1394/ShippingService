@@ -3,16 +3,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ShippingService.Api.Infrastructure.Configurations;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using ShippingService.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using ShippingService.Api.BackgroundServices;
 using ShippingService.Api.Infrastructure.Filters;
 using Microsoft.Extensions.Hosting;
 using ShippingService.Api.Infrastructure.Registrations;
-using ShippingService.Core.Settings;
 
 namespace ShippingService.Api
 {
@@ -31,7 +28,6 @@ namespace ShippingService.Api
                 {
                     options.Filters.Add<HttpGlobalExceptionFilter>();
                     options.Filters.Add<ValidateModelStateFilter>();
-                    options.Filters.Add<ApiKeyAuthorizationFilter>();
                 })
                 .AddApiExplorer()
                 .AddDataAnnotations()
@@ -40,16 +36,11 @@ namespace ShippingService.Api
             services.AddHttpContextAccessor();
 
             //there is a difference between AddDbContext() and AddDbContextPool(), more info https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-2.0#dbcontext-pooling and https://stackoverflow.com/questions/48443567/adddbcontext-or-adddbcontextpool
-            services.AddDbContextPool<CarsContext>(options => options.UseNpgsql(_configuration.GetConnectionString("PostgresSqlDb")));
+            services.AddDbContextPool<DBContext>(options => options.UseNpgsql(_configuration.GetConnectionString("PostgresSqlDb")));
 
-            services.Configure<ApiKeySettings>(_configuration.GetSection("ApiKey"));
             services.AddSwagger(_configuration);
 
-            services.Configure<PingWebsiteSettings>(_configuration.GetSection("PingWebsite"));
-            services.AddHostedService<PingWebsiteBackgroundService>();
-            services.AddHttpClient(nameof(PingWebsiteBackgroundService));
-
-            services.AddHealthChecks();
+            services.AddHealthChecks().AddNpgSql(_configuration.GetConnectionString("PostgresSqlDb"));
         }
 
         public virtual void ConfigureContainer(ContainerBuilder builder)

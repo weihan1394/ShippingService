@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   postgres:
-    image: postgres:12.2
+    image: postgres:12.3
     container_name: markono-postgres
     environment:
       POSTGRES_USER: root
@@ -10,13 +10,13 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./data/postgres/data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
     networks:
       - markono-network
 
 volumes:
-  dbdata:
-  
+  pgdata:
+
 networks:
   markono-network:
     name: markono-network
