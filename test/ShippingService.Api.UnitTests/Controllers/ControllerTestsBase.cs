@@ -24,6 +24,7 @@ namespace ShippingService.Api.UnitTests.Controllers
             httpContextMock.Setup(mock => mock.Response).Returns(httpResponseMock.Object);
             httpContextMock.Setup(mock => mock.Request).Returns(httpRequestMock.Object);
 
+            //Mock
             var builder = new ConfigurationBuilder()
                .AddJsonFile("appsettings.test.json");
             IConfiguration config = builder.Build();
