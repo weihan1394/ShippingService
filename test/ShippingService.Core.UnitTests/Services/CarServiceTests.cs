@@ -15,34 +15,34 @@ namespace ShippingService.Core.UnitTests.Services
 {
     public class CarServiceTests
     {
-        private static readonly Fixture _fixture = new Fixture();
+        //private static readonly Fixture _fixture = new Fixture();
 
-        private readonly CarService _service;
-        private readonly Mock<CarsContext> _dbContextMock;
+        //private readonly CarService _service;
+        //private readonly Mock<CarsContext> _dbContextMock;
 
-        public CarServiceTests()
-        {
-            _dbContextMock = new Mock<CarsContext>(new DbContextOptionsBuilder<CarsContext>().Options);
+        //public CarServiceTests()
+        //{
+        //    _dbContextMock = new Mock<CarsContext>(new DbContextOptionsBuilder<CarsContext>().Options);
 
-            _service = new CarService(_dbContextMock.Object);
-        }
+        //    _service = new CarService(_dbContextMock.Object);
+        //}
 
-        [Theory, AutoData]
-        public async Task GetAllSortedByPlateAsync_should_return_expected_result(int rand1, int rand2, int expectedId)
-        {
-            //given
-            var cars = new List<car>();
-            _fixture.AddManyTo(cars, rand1);
-            cars.Add(new car { id = expectedId, plate = "0" });
-            _fixture.AddManyTo(cars, rand2);
+        //[Theory, AutoData]
+        //public async Task GetAllSortedByPlateAsync_should_return_expected_result(int rand1, int rand2, int expectedId)
+        //{
+        //    //given
+        //    var cars = new List<car>();
+        //    _fixture.AddManyTo(cars, rand1);
+        //    cars.Add(new car { id = expectedId, plate = "0" });
+        //    _fixture.AddManyTo(cars, rand2);
 
-            _dbContextMock.Setup(x => x.cars).Returns(cars.GetMockDbSetObject());
+        //    _dbContextMock.Setup(x => x.cars).Returns(cars.GetMockDbSetObject());
 
-            //when
-            var result = await _service.GetAllSortedByPlateAsync(default);
+        //    //when
+        //    var result = await _service.GetAllSortedByPlateAsync(default);
 
-            //then
-            result.First().Id.Should().Be(expectedId);
-        }
+        //    //then
+        //    result.First().Id.Should().Be(expectedId);
+        //}
     }
 }
