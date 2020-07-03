@@ -11,7 +11,7 @@ namespace ShippingService.Core.Repositories
     public interface IShippingExpressRepository
     {
         Task<bool> insertRecords(List<express> lsShippingExpress, CancellationToken cancellationToken);
-        Task deleteAllRecords(CancellationToken cancellationToken);
+        Task<bool> deleteAllRecords(CancellationToken cancellationToken);
 
         List<express> retrieveAll(CancellationToken cancellationToken);
     }
@@ -23,15 +23,19 @@ namespace ShippingService.Core.Repositories
 
         }
 
-        public async Task deleteAllRecords(CancellationToken cancellationToken)
+        public async Task<bool> deleteAllRecords(CancellationToken cancellationToken)
         {
             try
             {
                 int row = dBContext.Database.ExecuteSqlCommand("DELETE FROM express");
                 dBContext.SaveChanges();
+
+                return true;
             } catch (Exception ex)
             {
                 Console.WriteLine(ex);
+
+                return false;
             }
         } 
 

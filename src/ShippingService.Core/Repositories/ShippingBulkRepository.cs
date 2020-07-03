@@ -10,7 +10,7 @@ namespace ShippingService.Core.Repositories
     public interface IShippingBulkRepository
     {
         Task<bool> insertRecords(List<bulk> lsShippingExpress, CancellationToken cancellationToken);
-        Task deleteAllRecords(CancellationToken cancellationToken);
+        Task<bool> deleteAllRecords(CancellationToken cancellationToken);
     }
 
     public class ShippingBulkRepository : RepositoryBase<bulk>, IShippingBulkRepository
@@ -19,15 +19,18 @@ namespace ShippingService.Core.Repositories
         {
         }
 
-        public async Task deleteAllRecords(CancellationToken cancellationToken)
+        public async Task<bool> deleteAllRecords(CancellationToken cancellationToken)
         {
             try
             {
                 dBContext.Database.ExecuteSqlCommand("DELETE FROM bulk");
                 dBContext.SaveChanges();
+
+                return true;
             } catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                return false;
             }
         } 
 

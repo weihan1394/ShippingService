@@ -10,17 +10,17 @@ using Xunit;
 
 namespace ShippingService.Core.UnitTests.Repositories
 {
-    public class ShippingBulkRepositoryTest
+    public class ShippingExpressRepositoryTest
     {
         private static readonly Fixture _fixture = new Fixture();
 
-        private readonly ShippingBulkRepository _repository;
+        private readonly ShippingExpressRepository _repository;
 
         private const string InMemoryConnectionString = "DataSource=:memory:";
         private readonly SqliteConnection _connection;
         protected readonly DBContext dbContext;
 
-        public ShippingBulkRepositoryTest()
+        public ShippingExpressRepositoryTest()
         {
             _connection = new SqliteConnection(InMemoryConnectionString);
             _connection.Open();
@@ -34,7 +34,7 @@ namespace ShippingService.Core.UnitTests.Repositories
                 dbContext.Database.EnsureCreated();
             }
 
-            _repository = new ShippingBulkRepository(dbContext);
+            _repository = new ShippingExpressRepository(dbContext);
         }
 
         [Fact]
@@ -56,12 +56,12 @@ namespace ShippingService.Core.UnitTests.Repositories
         [Fact]
         public async Task insertRecords_should_return_true()
         {
-            //given
-            var bulks = _fixture.Build<bulk>()
+            //prepare data
+            var bulks = _fixture.Build<express>()
                 .CreateMany(20);
 
-            List<bulk> lsShippingBulks = new List<bulk>(bulks);
-            bool result = await _repository.insertRecords(lsShippingBulks, default);
+            List<express> lsShippingExpress = new List<express>(bulks);
+            bool result = await _repository.insertRecords(lsShippingExpress, default);
 
             // assert
             result.Should().BeTrue();

@@ -37,7 +37,7 @@ namespace ShippingService.Core.Services
 
         CultureInfo cultures = new CultureInfo("en-US");
 
-        public async Task saveFile([FromForm] List<IFormFile> files, string directory, string subDirectory, CancellationToken cancellationToken)
+        public async Task saveFile(List<IFormFile> files, string directory, string subDirectory, CancellationToken cancellationToken)
         {
             subDirectory = subDirectory ?? string.Empty;
             var target = Path.Combine(directory, subDirectory);

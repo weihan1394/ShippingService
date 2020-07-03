@@ -1,5 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="AutoFixture" Version="4.11.0" />
     <PackageReference Include="AutoFixture.Xunit2" Version="4.11.0" />
     <PackageReference Include="coverlet.msbuild" Version="2.8.1" />
@@ -15,5 +25,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\ShippingService.Core\ShippingService.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\test.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
