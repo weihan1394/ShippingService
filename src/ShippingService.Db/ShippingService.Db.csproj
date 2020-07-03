@@ -12,12 +12,14 @@
     <None Remove="Scripts\Sql\S001_CreateShippingExpresTable.sql" />
     <None Remove="Scripts\Sql\S002_CreateShippingBulkTable.sql" />
     <None Remove="Scripts\Sql\S003_CreateShippingPostalTable.sql" />
+    <None Remove="Scripts\Sql\S004_CreateShippingVersionTable.sql" />
   </ItemGroup>
   
   <ItemGroup>
     <Content Include="appsettings.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\Sql\S004_CreateShippingVersionTable.sql" />
     <EmbeddedResource Include="Scripts\Sql\S002_CreateShippingBulkTable.sql" />
     <EmbeddedResource Include="Scripts\Sql\S003_CreateShippingPostalTable.sql" />
     <EmbeddedResource Include="Scripts\Sql\S001_CreateShippingExpresTable.sql" />
