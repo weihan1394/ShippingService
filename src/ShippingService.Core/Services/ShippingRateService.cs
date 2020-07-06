@@ -61,10 +61,10 @@ namespace ShippingService.Core.Services
                             int colCount = worksheet.Dimension.End.Column;  //get Column Count
                             int rowCount = worksheet.Dimension.End.Row;
 
-                            List<express> lsShippingExpress = new List<express>();
+                            List<Express> lsShippingExpress = new List<Express>();
                             for (int row = 2; row < rowCount; row++)
                             {
-                                express shippingExpress = new express();
+                                Express shippingExpress = new Express();
                                 shippingExpress.id = row - 1;
                                 for (int col = 1; col < colCount; col++)
                                 {
@@ -127,10 +127,10 @@ namespace ShippingService.Core.Services
                             worksheet = package.Workbook.Worksheets["Bulk Mail"];
                             colCount = worksheet.Dimension.End.Column;  //get Column Count
                             rowCount = worksheet.Dimension.End.Row;
-                            List<bulk> lsShippingBulk = new List<bulk>();
+                            List<Bulk> lsShippingBulk = new List<Bulk>();
                             for (int row = 4; row < rowCount; row++)
                             {
-                                bulk shippingBulk = new bulk();
+                                Bulk shippingBulk = new Bulk();
                                 shippingBulk.id = row - 3;
                                 for (int col = 1; col < colCount; col++)
                                 {
@@ -201,10 +201,10 @@ namespace ShippingService.Core.Services
                             worksheet = package.Workbook.Worksheets["Postal"];
                             colCount = worksheet.Dimension.End.Column;  //get Column Count
                             rowCount = worksheet.Dimension.End.Row;
-                            List<postal> lsShippingPostal = new List<postal>();
+                            List<Postal> lsShippingPostal = new List<Postal>();
                             for (int row = 4; row < rowCount; row++)
                             {
-                                postal shippingPostal = new postal();
+                                Postal shippingPostal = new Postal();
                                 shippingPostal.id = row - 3;
                                 for (int col = 1; col < colCount; col++)
                                 {
@@ -290,9 +290,9 @@ namespace ShippingService.Core.Services
 
         public List<ExpressDto> retrieveExpress(CancellationToken cancellationToken)
         {
-            List<express> lsExpress = _shippingExpressRepository.retrieveAll(cancellationToken);
+            List<Express> lsExpress = _shippingExpressRepository.retrieveAll(cancellationToken);
             List<ExpressDto> lsExpressDto = new List<ExpressDto>();
-            foreach(express e in lsExpress)
+            foreach(Express e in lsExpress)
             {
                 ExpressDto expressDto = ExpressDtoMapper.map(e);
 

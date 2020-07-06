@@ -1,8 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShippingService.Core.Models
 {
-    public class postal
+    [Table("postal", Schema = "public")]
+    public class Postal
     {
         [Key]
         public int id { get; set; }
@@ -22,5 +24,7 @@ namespace ShippingService.Core.Models
         public double singpost_item_rate { get; set; }
 
         public double singpost_rate_per_kg { get; set; }
+
+        //public shipping_version shipping_version { get; set; }
     }
 }

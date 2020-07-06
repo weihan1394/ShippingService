@@ -1,8 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShippingService.Core.Models
 {
-    public class bulk
+    [Table("bulk", Schema ="public")]
+    public class Bulk
     {
         [Key]
         public int id { get; set; }
@@ -32,5 +34,7 @@ namespace ShippingService.Core.Models
         public double dai_item_rate { get; set; }
 
         public double dai_rate_per_kg { get; set; }
+
+        //public shipping_version shipping_version { get; set; }
     }
 }

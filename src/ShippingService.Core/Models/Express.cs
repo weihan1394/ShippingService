@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace ShippingService.Core.Models
 {
-    public class express
+    [Table("express", Schema = "public")]
+    public class Express
     {
         [Key]
         public int id { get; set; }
@@ -31,5 +33,7 @@ namespace ShippingService.Core.Models
         public double ninja_van { get; set; }
 
         public int zone { get; set; }
+
+        //public shipping_version shipping_version { get; set; }
     }
 }
