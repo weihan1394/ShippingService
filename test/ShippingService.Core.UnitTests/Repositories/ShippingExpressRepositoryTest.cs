@@ -57,10 +57,10 @@ namespace ShippingService.Core.UnitTests.Repositories
         public async Task insertRecords_should_return_true()
         {
             //prepare data
-            var bulks = _fixture.Build<express>()
+            var express = _fixture.Build<Express>()
                 .CreateMany(20);
 
-            List<express> lsShippingExpress = new List<express>(bulks);
+            List<Express> lsShippingExpress = new List<Express>(express);
             bool result = await _repository.insertRecords(lsShippingExpress, default);
 
             // assert
