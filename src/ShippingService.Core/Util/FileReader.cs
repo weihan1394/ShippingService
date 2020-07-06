@@ -23,10 +23,10 @@ namespace ShippingService.Core.Util
                     int colCount = worksheet.Dimension.End.Column;  //get Column Count
                     int rowCount = worksheet.Dimension.End.Row;
 
-                    List<express> lsExpressDto = new List<express>();
+                    List<Express> lsExpressDto = new List<Express>();
                     for (int row = 2; row < rowCount; row++)
                     {
-                        express expressDto = new express();
+                        Express expressDto = new Express();
                         for (int col = 1; col < colCount; col++)
                         {
                             string currValue = worksheet.Cells[row, col].Value.ToString().Trim();

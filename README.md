@@ -8,26 +8,12 @@ Markono Shipping Service Rate
 1. [EF Core](https://docs.microsoft.com/ef/)
     * [Npgsql](https://github.com/npgsql/npgsql)
 1. Tests
-    * Integration tests with InMemory database
-        * [FluentAssertions]
-        * [xUnit]
     * Unit tests
         * [AutoFixture](https://github.com/AutoFixture/AutoFixture)
         * [FluentAssertions]
         * [Moq](https://github.com/moq/moq4)
         * [Moq.AutoMock](https://github.com/moq/Moq.AutoMocker)
         * [xUnit]
-    * Load tests
-        * [FluentAssertions]
-        * [NBomber](https://nbomber.com/)
-        * [xUnit]
-1. Code quality
-    * [EditorConfig](https://editorconfig.org/) ([.editorconfig](.editorconfig))
-    * Analizers ([Microsoft.CodeAnalysis.Analyzers](https://github.com/dotnet/roslyn-analyzers), [Microsoft.AspNetCore.Mvc.Api.Analyzers](https://github.com/aspnet/AspNetCore/tree/master/src/Analyzers))
-    * [Rules](ShippingService.ruleset)
-    * Code coverage
-        * [Coverlet](https://github.com/tonerdo/coverlet)
-        * [Codecov](https://codecov.io/)
 1. Docker
     * [Dockerfile](dockerfile)
     * [Docker-compose](docker-compose.yml)
@@ -42,8 +28,7 @@ Markono Shipping Service Rate
 
 [ShippingService.Db](src/ShippingService.Db)
 
-* Console application as a simple db migration tool - [Program.cs](src/ShippingService.Db/Program.cs)
-* Sample migration scripts, both `.sql` and `.cs` - [S001_AddCarTable.sql](src/ShippingService.Db/Scripts/Sql/S001_AddCarTable.sql)
+* Console application as a simple db migration tool - [Program.cs](src/ShippingService.Db/Program.cs
 
 ## Build the solution
 

@@ -10,35 +10,39 @@ namespace ShippingService.Core.Repositories
 {
     public interface IShippingExpressRepository
     {
-        Task<bool> insertRecords(List<express> lsShippingExpress, CancellationToken cancellationToken);
-        Task deleteAllRecords(CancellationToken cancellationToken);
+        Task<bool> insertRecords(List<Express> lsShippingExpress, CancellationToken cancellationToken);
+        Task<bool> deleteAllRecords(CancellationToken cancellationToken);
 
-        List<express> retrieveAll(CancellationToken cancellationToken);
+        List<Express> retrieveAll(CancellationToken cancellationToken);
     }
 
-    public class ShippingExpressRepository : RepositoryBase<express>, IShippingExpressRepository
+    public class ShippingExpressRepository : RepositoryBase<Express>, IShippingExpressRepository
     {
         public ShippingExpressRepository(DBContext dbContext) : base(dbContext)
         {
 
         }
 
-        public async Task deleteAllRecords(CancellationToken cancellationToken)
+        public async Task<bool> deleteAllRecords(CancellationToken cancellationToken)
         {
             try
             {
                 int row = dBContext.Database.ExecuteSqlCommand("DELETE FROM express");
                 dBContext.SaveChanges();
+
+                return true;
             } catch (Exception ex)
             {
                 Console.WriteLine(ex);
+
+                return false;
             }
         } 
 
-        public async Task<bool> insertRecords(List<express> lsShippingExpress, CancellationToken cancellationToken)
+        public async Task<bool> insertRecords(List<Express> lsShippingExpress, CancellationToken cancellationToken)
         {
             try { 
-                foreach (express e in lsShippingExpress)
+                foreach (Express e in lsShippingExpress)
                 {
                     await dBContext.AddAsync(e, cancellationToken);
                 }
@@ -52,9 +56,9 @@ namespace ShippingService.Core.Repositories
             }
         }
 
-        public List<express> retrieveAll(CancellationToken cancellationToken)
+        public List<Express> retrieveAll(CancellationToken cancellationToken)
         {
-            List<express> lsExpress = dBContext.express.ToList();
+            List<Express> lsExpress = dBContext.express.ToList();
             return lsExpress;
         }
     }

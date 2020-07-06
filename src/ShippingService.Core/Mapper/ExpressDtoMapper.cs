@@ -5,7 +5,7 @@ namespace ShippingService.Core.Mapper
 {
     class ExpressDtoMapper
     {
-        public static ExpressDto map(express e)
+        public static ExpressDto map(Express e)
         {
             return new ExpressDto
             {

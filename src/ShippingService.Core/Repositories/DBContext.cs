@@ -10,15 +10,15 @@ namespace ShippingService.Core
         {
         }
 
-        public virtual DbSet<express> express { get; set; }
-        public virtual DbSet<bulk> bulk { get; set; }
-        public virtual DbSet<postal> postal { get; set; }
+        public virtual DbSet<Express> express { get; set; }
+        public virtual DbSet<Bulk> bulk { get; set; }
+        public virtual DbSet<Postal> postal { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("public");
 
-            modelBuilder.Entity<express>(entity =>
+            modelBuilder.Entity<Express>(entity =>
             {
                 entity.Property(e => e.id).IsUnicode(false);
                 entity.Property(e => e.type).IsUnicode(false);
@@ -31,9 +31,11 @@ namespace ShippingService.Core
                 entity.Property(e => e.dhl_express).IsUnicode(false);
                 entity.Property(e => e.sf_economy).IsUnicode(false);
                 entity.Property(e => e.zone).IsUnicode(false);
+
+                entity.HasIndex(e => e.id).IsUnique();
             });
 
-            modelBuilder.Entity<bulk>(entity =>
+            modelBuilder.Entity<Bulk>(entity =>
             {
                 entity.Property(e => e.id).IsUnicode(false);
                 entity.Property(e => e.type).IsUnicode(false);
@@ -51,7 +53,7 @@ namespace ShippingService.Core
                 entity.Property(e => e.dai_rate_per_kg).IsUnicode(false);
             });
 
-            modelBuilder.Entity<postal>(entity =>
+            modelBuilder.Entity<Postal>(entity =>
             {
                 entity.Property(e => e.id).IsUnicode(false);
                 entity.Property(e => e.type).IsUnicode(false);

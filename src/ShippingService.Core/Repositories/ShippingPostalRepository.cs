@@ -9,33 +9,37 @@ namespace ShippingService.Core.Repositories
 {
     public interface IShippingPostalRepository
     {
-        Task<bool> insertRecords(List<postal> lsShippingExpress, CancellationToken cancellationToken);
-        Task deleteAllRecords(CancellationToken cancellationToken);
+        Task<bool> insertRecords(List<Postal> lsShippingExpress, CancellationToken cancellationToken);
+        Task<bool> deleteAllRecords(CancellationToken cancellationToken);
     }
 
-    public class ShippingPostalRepository : RepositoryBase<postal>, IShippingPostalRepository
+    public class ShippingPostalRepository : RepositoryBase<Postal>, IShippingPostalRepository
     {
         public ShippingPostalRepository(DBContext dbContext) : base(dbContext)
         {
 
         }
 
-        public async Task deleteAllRecords(CancellationToken cancellationToken)
+        public async Task<bool> deleteAllRecords(CancellationToken cancellationToken)
         {
             try
             {
                 int row = dBContext.Database.ExecuteSqlCommand("DELETE FROM postal");
                 dBContext.SaveChanges();
+
+                return true;
             } catch (Exception ex)
             {
                 Console.WriteLine(ex);
+
+                return false;
             }
         } 
 
-        public async Task<bool> insertRecords(List<postal> lsShippingPostal, CancellationToken cancellationToken)
+        public async Task<bool> insertRecords(List<Postal> lsShippingPostal, CancellationToken cancellationToken)
         {
             try { 
-                foreach (postal e in lsShippingPostal)
+                foreach (Postal e in lsShippingPostal)
                 {
                     await dBContext.AddAsync(e, cancellationToken);
                 }
